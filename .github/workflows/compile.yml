@@ -21,7 +21,7 @@ jobs:
           working_directory: tex
           latexmk_use_lualatex: false
           latexmk_shell_escape: true
-          latexmk_args: -interaction=nonstopmode -halt-on-error
+          args: -interaction=nonstopmode -halt-on-error
 
       - name: Upload PDF artifact
         uses: actions/upload-artifact@v4
