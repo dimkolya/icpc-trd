@@ -1,25 +1,32 @@
-name: Compile TRD
+name: Compile
 
 on:
   push:
     branches:
       - main
+  pull_request:
 
 jobs:
   build_latex:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3-pygments
 
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v3
         with:
           root_file: tex/main.tex
-          args: -pdf -shell-escape
+          args: -pdf -shell-escape -interaction=nonstopmode -file-line-error
 
       - name: Upload PDF artifact
         uses: actions/upload-artifact@v4
         with:
           name: trd-pdf
-          path: build/trd.pdf
+          path: tex/main.pdf
