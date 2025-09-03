@@ -1,29 +1,37 @@
-name: Compile
+name: Build LaTeX
 
 on:
   push:
-    branches:
-      - main
+    branches: [ "**" ]
   pull_request:
+    branches: [ "**" ]
 
 jobs:
-  build_latex:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Install dependencies
+      - name: Install TeX Live + Python (for minted)
         run: |
           sudo apt-get update
-          sudo apt-get install -y python3-pygments
+          sudo apt-get install -y \
+            texlive-latex-base \
+            texlive-latex-extra \
+            texlive-fonts-recommended \
+            texlive-lang-cyrillic \
+            texlive-science \
+            texlive-luatex \
+            texlive-xetex \
+            python3-pygments \
+            latexmk
 
-      - name: Compile LaTeX document
-        uses: xu-cheng/latex-action@v3
-        with:
-          root_file: tex/main.tex
-          args: -pdf -shell-escape -interaction=nonstopmode -file-line-error
+      - name: Compile PDF with latexmk
+        working-directory: tex
+        run: |
+          latexmk -pdf -shell-escape -interaction=nonstopmode -halt-on-error main.tex
 
       - name: Upload PDF artifact
         uses: actions/upload-artifact@v4
