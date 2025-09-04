@@ -1,0 +1,83 @@
+\section{Math}
+
+\subsubsection{Binpow}
+\begin{minted}{cpp}
+inline ll binpow(ll a, ll p, ll m) {
+  ll r = 1;
+  while (p) {
+    if (p & 1) {
+      r = r * a % m;
+    }
+    a = a * a % m;
+    p >>= 1;
+  }
+  return r;
+}
+\end{minted}
+
+\subsection{Polynomial multiplication}
+
+$c_k=\displaystyle\sum_{i=0}^ka_ib_{k-i}\le(k+1)\cdot\text{MAX}^2$
+\subsubsection{FFT}
+Complex or modular $\{w^i\}_{i=0}^{n-1},\;w^n=1$.
+\begin{enumerate}
+\item $\forall i:\;A(w^i),B(w^i)$
+\item $\forall i:\;y_i=A(w^i)B(w^i)$
+\item $c_i=Y(w^{-i})\cdot n^{-1}$
+\end{enumerate}
+
+\begin{minted}{cpp}
+vector<ll> fft(ll n, ll p, const vector<ll> &a,
+               const vector<ll> &w) {
+    ll k = __lg(n);
+    vector<ll> y(n);
+    for (ll i = 0; i < n; ++i) {
+        ll x = i, r = 0;
+        for (ll j = 0; j < k; j++) {
+            r <<= 1;
+            r |= x & 1;
+            x >>= 1;
+        }
+        y[r] = a[i];
+    }
+    for (ll l = 1; l < n; l *= 2)
+        for (ll j = 0; j < n; j += 2 * l)
+            for (ll i = 0; i < l; ++i) {
+                ll u = y[j + i];
+                ll v = w[i*n/l/2] * y[j+i+l] % p;
+                y[j + i] = (u + v) % p;
+                y[j + i + l] = (u - v + p) % p;
+            }
+    return y;
+}
+
+// (1 << 17) 131072*7631+1=1000210433 3^7631
+// (1 << 18) 262144*3832+1=1004535809 3^3832
+// (1 << 19) 524288*1916+1=1004535809 3^1916
+// (1 << 20) 1048576*1003+1=1051721729 3^1003
+
+vector<ll> polymul(vector<ll> &a, vector<ll> &b) {
+    ll k = 19;
+    ll n = 1 << k; // n >= size * 2 - 1
+    a.resize(n), b.resize(n);
+    ll p = n * 1916 + 1;
+    ll x = binpow(3, (p - 1) / n, p);
+    vector<ll> w(n);
+    w[0] = 1;
+    for (ll i = 1; i < n; ++i) {
+        w[i] = w[i - 1] * x % p;
+    }
+    auto u = fft(n, p, a, w);
+    auto y = fft(n, p, b, w);
+    ll n_1 = binpow(n, p - 2, p);
+    for (ll i = 0; i < n; ++i) {
+        y[i] = y[i] * u[i] % p * n_1 % p;
+    }
+    x = binpow(x, p - 2, p);
+    for (ll i = 1; i < n; ++i) {
+        w[i] = w[i - 1] * x % p;
+    }
+    return fft(n, p, y, w);
+}
+
+\end{minted}
