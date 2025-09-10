@@ -14,7 +14,27 @@ Complex or modular $\{w^i\}_{i=0}^{n-1},\;w^n=1$.
 \item $c_i=Y(w^{-i})\cdot n^{-1}$
 \end{enumerate}
 \inputminted{cpp}{../code/math/fft.cpp}
-
-\subsection{Karatsuba}
+\subsubsection{Karatsuba}
 $O(N^{\log_2 3})\approx O(N^{1.58\dots})$
 \inputminted{cpp}{../code/math/karatsuba.cpp}
+
+\subsection{Формулы}
+\textbf{Стирлинга.} $\ln n!=n\ln n-n+O(\ln n).$
+$$n!=\sqrt{2\pi n}\left(\dfrac{n}{e}\right)^n\exp\dfrac{1}{12n+\theta_n},\;\theta_n\in(0,1).$$
+\textbf{Вандермонда.} $C_{n_1+\dots+n_p}^m=\displaystyle\sum_{k_1+\dots+k_p=m}C_{n_1}^{k_1}\cdot\ldots\cdot C_{n_p}^{k_p}$.
+
+\subsection{Теория вероятности}
+\subsubsection{Дискретные распределения}
+\textbf{Бернулли.} Вероятность успеха $p$:
+$$\xi\in\{0,1\}\quad \mathbb{E}\xi=p,\;\mathbb{V}\xi=p(1-p).$$
+\textbf{Биномиальное.} Сумма независимых бернул. сл. величин:
+$$\xi_k\sim\text{Bern}(p),\;\eta\sim\text{Bin}(n),\;\eta=\xi_1+\dots+\xi_n.$$
+$$P(\eta=k)=C_n^kp^k(1-p)^{n-k},\;\mathbb{E}\eta=np,\;\mathbb{V}\eta=np(1-p).$$
+\textbf{Пуассона.} $k$ событий за $T$, $\lambda$ ср. кол-во событий за $T$:
+$$P(\xi=k)=e^{-\lambda}\dfrac{\lambda^k}{k!},\;\mathbb{E}\xi=\mathbb{V}\xi=\lambda.$$
+\textit{Теорема.} Пусть $\xi\sim\text{Bin}(n,\frac{\lambda}{n})$, тогда:
+$$\displaystyle\lim_{n\to\infty}P(\xi=k)=e^{-\lambda}\dfrac{\lambda^k}{k!},\quad k\in\mathbb{Z}_+.$$
+\textbf{Геом.} До первого успеха (включительно) $k$ попыток:
+$$P(\xi=k)=(1-p)^{k-1}p,\;\mathbb{E}=\dfrac{1}{p},\;\mathbb{V}\xi=\dfrac{1-p}{p^2}.$$
+\textbf{Гипергеом.} Среди $N$ деталей $K$ бракованных. Вероятность того, что среди $n$ выбранных ровно $k$ бракованных:
+$$p_k=\dfrac{C_K^kC_{N-K}^{n-k}}{C_N^n},\;\mathbb{E}\xi=\dfrac{nK}{N},\;\mathbb{V}\xi=\dfrac{nK(N-K)(N-n)}{N^2(N-1)}.$$

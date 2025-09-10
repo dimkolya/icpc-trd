@@ -24,7 +24,9 @@ void karatsuba(int *a, int *b, int *c, int n) {
         karatsuba(a, b, c, k);
         karatsuba(a + k, b + k, c + n, k);
         int *t1 = t, *t2 = t + k;
-        int *s1 = c, *s2 = c + k, *s3 = c + 2 * k, *s4 = c + 3 * k;
+        int *s1 = c, *s2 = c + k,
+            *s3 = c + 2 * k,
+            *s4 = c + 3 * k;
         for (int i = 0; i < k; i++) {
             int c1 = s2[i] + t1[i] - s1[i] - s3[i];
             int c2 = s3[i] + t2[i] - s2[i] - s4[i];
