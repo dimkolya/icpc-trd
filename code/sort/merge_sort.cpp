@@ -9,7 +9,6 @@ void merge_sort(vector<ll> &a, ll l, ll r) {
                   a.begin() + r);
 //    merge(l, m, r, a);
 }
-
 //for inversions
 ll inv = 0;
 void merge(ll l, ll m, ll r, vector<ll> &a) {

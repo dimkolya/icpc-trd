@@ -1,12 +1,10 @@
 #pragma GCC optimize("O3")
 #pragma GCC target("avx2")
-
 // int m = 1 << __lg(2 * n - 1);
 // int a[m], b[m], c[2 * m];
 // fill(a, a + m, 0);
 // fill(b, b + m, 0);
 // fill(c, c + 2 * m, 0);
-
 void karatsuba(int *a, int *b, int *c, int n) {
     if (n <= 64) {
         for (int i = 0; i < n; i++)

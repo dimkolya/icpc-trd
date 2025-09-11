@@ -6,7 +6,6 @@ struct splay_tree {
         node *parent;
     };
     node *root = nullptr;
-
     static void rl(node *v) {
         node *p = v->parent;
         node *r = v->right;
@@ -21,7 +20,6 @@ struct splay_tree {
         r->parent = p;
         if (v->right) v->right->parent = v;
     }
-
     static void rr(node *v) {
         node *p = v->parent;
         node *l = v->left;
@@ -36,7 +34,6 @@ struct splay_tree {
         l->parent = p;
         if (v->left) v->left->parent = v;
     }
-
     void splay(node *v) {
         while (v->parent) {
             node *g = v->parent->parent;
@@ -64,7 +61,6 @@ struct splay_tree {
         }
         root = v;
     }
-
     node *lower_bound(ll x) {
         node *v = root;
         node *result = nullptr;
@@ -77,7 +73,6 @@ struct splay_tree {
         if (last) splay(last);
         return result;
     }
-
     node *upper_bound(ll x) {
         node *v = root;
         node *result = nullptr;
@@ -90,7 +85,6 @@ struct splay_tree {
         if (last) splay(last);
         return result;
     }
-
     node *under_bound(ll x) {
         node *v = root;
         node *result = nullptr;
@@ -103,7 +97,6 @@ struct splay_tree {
         if (last) splay(last);
         return result;
     }
-
     // this.keys < r.keys
     void merge(splay_tree &r) {
         if (!root) {
@@ -118,7 +111,6 @@ struct splay_tree {
         r.root->parent = root;
         r.root = nullptr;
     }
-
     // [return <x, x<= this]
     splay_tree split(ll x) {
         node *v = lower_bound(x);
@@ -129,13 +121,18 @@ struct splay_tree {
         v->left = nullptr;
         return splay_tree(l);
     }
-
     node *find(ll x) {
-        node *v = lower_bound(x);
-        if (v && v->key == x) return v;
-        return nullptr;
+        node *v = root;
+        node *last = nullptr;
+        while (v && v->key != x) {
+            last = v;
+            if (v->key > x) v = v->left;
+            else v = v->right;
+        }
+        if (v) splay(v);
+        else if (last) splay(last);
+        return v;
     }
-
     void insert(ll x) {
         if (!root) {
             root = new node{x};
@@ -155,11 +152,9 @@ struct splay_tree {
         else p->right = v;
         splay(v);
     }
-
     void erase(ll x) {
         node *v = find(x);
         if (!v) return;
-        splay(v);
         root = v->left;
         splay_tree r(v->right);
         if (root) root->parent = nullptr;
