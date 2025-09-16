@@ -2,7 +2,7 @@
 
 \subsection{NT}
 \subsubsection{Extended euclidean}
-$$\begin{case}\end{case}$$
+$$ax+by=\text{gcd}(a,b),\quad x=x_0+n\dfrac{b}{g},\;y=y_0-n\dfrac{a}{g},\;n\in\mathbb{Z}.$$
 \inputminted{cpp}{../code/math/egcd.cpp}
 \subsubsection{Binpow}
 \inputminted{cpp}{../code/math/binpow.cpp}
@@ -23,22 +23,24 @@ $O(N^{\log_2 3})\approx O(N^{1.58\dots})$
 \inputminted{cpp}{../code/math/karatsuba.cpp}
 
 \subsection{Формулы}
-\textbf{Стирлинга.} $\ln n!=n\ln n-n+O(\ln n).$
-$$n!=\sqrt{2\pi n}\left(\dfrac{n}{e}\right)^n\exp\dfrac{1}{12n+\theta_n},\;\theta_n\in(0,1).$$
-\textbf{Вандермонда.} $C_{n_1+\dots+n_p}^m=\displaystyle\sum_{k_1+\dots+k_p=m}C_{n_1}^{k_1}\cdot\ldots\cdot C_{n_p}^{k_p}$.
+\textit{Стирлинга.} $\ln n!=n\ln n-n+O(\ln n).$
+$$n!=\sqrt{2\pi n}\left(\dfrac{n}{e}\right)^n\exp\dfrac{1}{12n+\theta_n},\;\theta_n\in(0,1).$$\\
+\textit{Вандермонда.} $C_{n_1+\dots+n_p}^m=\displaystyle\sum_{k_1+\dots+k_p=m}C_{n_1}^{k_1}\cdot\ldots\cdot C_{n_p}^{k_p}$.\\
+\textit{Треугольник Паскаля.} $C_n^k=C_{n-1}^k+C_{n-1}^{k-1}$.\\
+\textit{Hockey-stick identity.} $C_r^r+C_{r+1}^r+\dots+C_n^r=C_{n+1}^{r+1}$.\\
 
 \subsection{Теория вероятности}
 \subsubsection{Дискретные распределения}
-\textbf{Бернулли.} Вероятность успеха $p$:
+\textit{Бернулли.} Вероятность успеха $p$:
 $$\xi\in\{0,1\}\quad \mathbb{E}\xi=p,\;\mathbb{V}\xi=p(1-p).$$
-\textbf{Биномиальное.} Сумма независимых бернул. сл. величин:
+\textit{Биномиальное.} Сумма независимых бернул. сл. величин:
 $$\xi_k\sim\text{Bern}(p),\;\eta\sim\text{Bin}(n),\;\eta=\xi_1+\dots+\xi_n.$$
 $$P(\eta=k)=C_n^kp^k(1-p)^{n-k},\;\mathbb{E}\eta=np,\;\mathbb{V}\eta=np(1-p).$$
-\textbf{Пуассона.} $k$ событий за $T$, $\lambda$ ср. кол-во событий за $T$:
+\textit{Пуассона.} $k$ событий за $T$, $\lambda$ ср. кол-во событий за $T$:
 $$P(\xi=k)=e^{-\lambda}\dfrac{\lambda^k}{k!},\;\mathbb{E}\xi=\mathbb{V}\xi=\lambda.$$
 \textit{Теорема.} Пусть $\xi\sim\text{Bin}(n,\frac{\lambda}{n})$, тогда:
 $$\displaystyle\lim_{n\to\infty}P(\xi=k)=e^{-\lambda}\dfrac{\lambda^k}{k!},\quad k\in\mathbb{Z}_+.$$
-\textbf{Геом.} До первого успеха (включительно) $k$ попыток:
+\textit{Геом.} До первого успеха (включительно) $k$ попыток:
 $$P(\xi=k)=(1-p)^{k-1}p,\;\mathbb{E}=\dfrac{1}{p},\;\mathbb{V}\xi=\dfrac{1-p}{p^2}.$$
-\textbf{Гипергеом.} Среди $N$ деталей $K$ бракованных. Вероятность того, что среди $n$ выбранных ровно $k$ бракованных:
+\textit{Гипергеом.} Среди $N$ деталей $K$ бракованных. Вероятность того, что среди $n$ выбранных ровно $k$ бракованных:
 $$p_k=\dfrac{C_K^kC_{N-K}^{n-k}}{C_N^n},\;\mathbb{E}\xi=\dfrac{nK}{N},\;\mathbb{V}\xi=\dfrac{nK(N-K)(N-n)}{N^2(N-1)}.$$
