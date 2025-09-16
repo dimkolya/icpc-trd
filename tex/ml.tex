@@ -1,0 +1,8 @@
+\section{ML}
+
+\subsection{RL}
+$\pi(a\vert s)$~--- вероятность сыграть $a$ в состоянии $s$, $r$~--- награда:
+$$V_\pi(s)=\mathbb{E}_\pi\left[\sum_{k=t+1} r_k\;\vert\;S_t=s\right],\quad\pi^*={\arg\max}_\pi V(s_0),$$
+$$V_\pi(s)=\sum_a\pi(a\vert s_i)\sum_{r,s'}p(r,s'\vert s,a)(r+V_\pi(s'))$$
+--- СЛАУ. Для оптимальной стратегии:
+$$V_*(s)=\max_a\sum_{r,s'}p(r,s'\vert s,a)(r+V_*(s')).$$
