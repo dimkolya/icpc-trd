@@ -19,8 +19,8 @@ const ll INF = 1e18;
 const ld PI = atan2(0, -1);
 
 int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(nullptr);
+  ios_base::sync_with_stdio(false);
+  cin.tie(nullptr);
 
-    return 0;
+  return 0;
 }

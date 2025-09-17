@@ -1,5 +1,5 @@
 struct graph {
-  graph(...) {...}
+  graph() {...}
   ld mst() const {
     vector<ld> key(n, INF);
     vector<ll> p(n, n);
