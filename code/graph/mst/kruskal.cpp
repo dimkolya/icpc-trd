@@ -6,9 +6,9 @@ struct graph {
     vector<ll> rang(n, 0);
     std::iota(p.begin(), p.end(), 0);
     for (ll i = 0; i < m; ++i) {
-      ll v = g[i].second.first;
-      ll u = g[i].second.second;
-      ll w = g[i].first;
+      ll v = e[i].second.first;
+      ll u = e[i].second.second;
+      ll w = e[i].first;
       if (get(v, p) != get(u, p)) {
         result += w;
         join(v, u, p, rang);
@@ -19,7 +19,7 @@ struct graph {
 private:
   using edge = pair<ll, pair<ll, ll>>; //{w, {u, v}}
   ll n, m;
-  vector<edge> g; //sorted by weight
+  vector<edge> e; //sorted by weight
   static ll get(ll x, vector<ll> &p) {
     if (p[x] != x) p[x] = get(p[x], p);
     return p[x];

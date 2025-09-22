@@ -2,7 +2,7 @@ struct dsu {
   vector<ll> p;
   vector<ll> s;
   dsu(ll n) {
-    s.resize(n, 1);
+    s.resize(n, 1); // note: fill 1
     p.resize(n);
     std::iota(p.begin(), p.end(), 0);
   }

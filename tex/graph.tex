@@ -1,5 +1,13 @@
 \section{Graph}
 
+\subsection{DFS-based}
+\subsubsection{Condensation (Kosaraju's, $O(N+M)$)}
+Handles loops and multiple edges.
+\inputminted{cpp}{../code/graph/dfs/kosaraju.cpp}
+\subsubsection{2-SAT}
+$$\bigcap(x_i\cup x_j),\quad\bigcap((x_{i_1}=e_1)\cup(x_{i_2}=e_2)).$$
+\inputminted{cpp}{../code/graph/dfs/tsat.cpp}
+
 \subsection{MST}
 \subsubsection{Prim's $O(N^2)$}
 \inputminted{cpp}{../code/graph/mst/prim.cpp}
