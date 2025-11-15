@@ -1,6 +1,14 @@
 \section{Graph}
 
 \subsection{DFS-based}
+\subsubsection{Eulers path}
+\inputminted{cpp}{../code/graph/dfs/euler.cpp}
+\subsubsection{Bridges}
+\inputminted{cpp}{../code/graph/dfs/bridges.cpp}
+\subsubsection{Articulation points}
+\inputminted{cpp}{../code/graph/dfs/articulation.cpp}
+\subsubsection{Components of edge biconnections}
+\inputminted{cpp}{../code/graph/dfs/biconnections.cpp}
 \subsubsection{Condensation (Kosaraju's, $O(N+M)$)}
 Handles loops and multiple edges.
 \inputminted{cpp}{../code/graph/dfs/kosaraju.cpp}
@@ -16,3 +24,13 @@ $$\bigcap(x_i\cup x_j),\quad\bigcap((x_{i_1}=e_1)\cup(x_{i_2}=e_2)).$$
 \subsubsection{Алгоритм двух китайцев}
 Поиск минимального дерева путей из $root$ в ориентированном графе за $O(NM)$.
 \inputminted{cpp}{../code/graph/mst/directed.cpp}
+
+\subsection{Shortest paths}
+\subsubsection{Dijkstra $O(n^2+m)$}
+\inputminted{cpp}{../code/graph/shortest_path/dijkstra.cpp}
+\subsubsection{Dijkstra $O(m\log m)$}
+\inputminted{cpp}{../code/graph/shortest_path/dijkstra_fast.cpp}
+\subsubsection{Floyd-Warshell}
+\inputminted{cpp}{../code/graph/shortest_path/floyd_warshell.cpp}
+\subsubsection{Ford-Bellman $O(mn)$}
+\inputminted{cpp}{../code/graph/shortest_path/ford_bellman.cpp}
