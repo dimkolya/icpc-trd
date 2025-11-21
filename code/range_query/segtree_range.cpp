@@ -18,6 +18,7 @@ struct st {
     push(i, tl, tm, tr);
     upd(l, r, v, i * 2, tl, tm);
     upd(l, r, v, i * 2 + 1, tm, tr);
+    data[i] = data[2 * i] + data[2 * i + 1];
   }
   ll get(ll l,ll r,ll i=1,ll tl=0,ll tr=-1) {
     if (tr == -1) tr = p;
