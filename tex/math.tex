@@ -6,6 +6,10 @@ $$ax+by=\text{gcd}(a,b),\quad x=x_0+n\dfrac{b}{g},\;y=y_0-n\dfrac{a}{g},\;n\in\m
 \inputminted{cpp}{../code/math/egcd.cpp}
 \subsubsection{Binpow}
 \inputminted{cpp}{../code/math/binpow.cpp}
+\subsubsection{Euler function $\varphi$}
+\inputminted{cpp}{../code/math/euler.cpp}
+\subsubsection{$\varphi$ function for 1 to n}
+\inputminted{cpp}{../code/math/euler_precalc.cpp}
 \subsubsection{Miller-Rabin test}
 \inputminted{cpp}{../code/math/miller_rabin.cpp}
 
@@ -35,9 +39,108 @@ $$1^4+2^4+\dots+n^4=\frac{n(n+1)(2n+1)(3n^2+3n-1)}{30}.$$
 \textit{Треугольник Паскаля.} $C_n^k=C_{n-1}^k+C_{n-1}^{k-1}$.\\
 \textit{Вандермонда.} $C_{n_1+\dots+n_p}^m=\displaystyle\sum_{k_1+\dots+k_p=m}C_{n_1}^{k_1}\cdot\ldots\cdot C_{n_p}^{k_p}$.\\
 \textit{Hockey-stick identity.} $C_r^r+C_{r+1}^r+\dots+C_n^r=C_{n+1}^{r+1}$.\\
+\textit{Числа Фибоначчи.} $F_n=\sum C_{n-k}^k$.\\
 \subsubsection{Асимптотика}
 \textit{Стирлинга.} $\ln n!=n\ln n-n+O(\ln n).$
 $$n!=\sqrt{2\pi n}\left(\dfrac{n}{e}\right)^n\exp\dfrac{1}{12n+\theta_n},\;\theta_n\in(0,1).$$\\
+\subsubsection{Код Грея}
+$n\otimes (n>>1)$\\
+
+\subsection{Дискретная математика}
+\subsubsection{Числа Стирлинга}
+1. I-го рода, количество перестановок порядка $n$ с $k$ циклами: $S[0,0]=1,S[0,k]=S[n,0]=0,S[n,k]=S[n-1,k-1]+(n-1)S[n-1,k]$;\\
+2. II-го рода, количество разбиений множества из $n$ элементов на $k$ непустых подмножеств: $S[n,k]=kS[n-1,k]+S[n-1,k-1]$.\\
+\subsubsection{Разбиение на слагаемые}
+1. Порядок важен: $2^{n-1}$;\\
+2. Порядок не важен: $p[n,k]$ -- кол-во слагаемых, где максимум $\le k$, $p[n,k]=p[n-k,k]+p[n,k-1]$.\\
+\begin{minted}{cpp}
+if(n<0)return 0;if(n==0)return 1;if(k==0)return 0;
+\end{minted}
+\subsubsection{Формула Эйлера}
+$V-E+F=2$.\\
+\subsubsection{Два ферзя}
+$\frac{n^4}{2}-\frac{5n^3}{3}+\frac{3n^2}{2}-\frac{n}{3}$.\\
+\subsubsection{Лемма Бернсайда}
+$C=\dfrac{1}{|G|}\displaystyle\sum_{g\in G}l^{}P(g)$, где $C$ --- кол-во различных классов эквивалентности, $P(g)$ --- кол-во циклов в перестановке $g$, l --- кол-во различных состояний одного элемента.
+
+\subsection{Линейная алгебра}
+\subsubsection{Обратные матрицы}
+\(\left(
+\begin{array}{cc}
+    x_1 & y_1 \\
+    x_2 & y_2
+\end{array}\right)^{-1}=\displaystyle\frac{1}{det}\left(
+\begin{array}{cc}
+    y_2 & -y_1 \\
+    -x_2 & x_1
+\end{array}\right),\ x_1y_2-x_2y_1;\)
+\(\displaystyle\frac{1}{det}\left(
+\begin{array}{ccc}
+    y_2z_3-y_3z_2 & y_3z_1-y_1z_3 & y_1z_2-y_2z_1 \\
+    x_3z_2-x_2z_3 & x_1z_3-x_3z_1 & x_2z_1-x_1z_2 \\
+    x_2y_3-x_3y_2 & x_3y_1-x_1y_3 & x_1y_2-x_2y_1
+\end{array}\right),\)
+\(x_1y_2z_3+y_1z_2x_3+z_1x_2y_3-z_1y_2x_3-y_1x_2z_3-x_1z_2y_3;\)
+\subsubsection{Числа Фибоначчи}
+\[f_{2n}=f_n(2f_{n+1}-f_n),\;f_{2n+1}=f_{n+1}^2+f_n^2\]
+\[\left(\begin{array}{cc}
+    1 & 1 \\
+    1 & 0
+\end{array}\right)^n=\left(\begin{array}{cc}
+    f_{n + 1} & f_n \\
+    f_n & f_{n - 1}
+\end{array}\right)\]
+
+\subsection{Геометрия}
+
+\subsubsection{Pick's formula for area}
+\(S=I+\displaystyle\frac{B}{2}-1\);\\
+\subsubsection{Cross product}
+\(\vec a\times\vec b=-\vec b\times\vec a,\ |\vec a\times\vec b|=|\vec a||\vec b|\sin\varphi\),
+\[\left\{\begin{array}{l}
+    c_x=a_yb_z-a_zb_y \\
+    c_y=a_zb_x-a_xb_z \\
+    c_z=a_xb_y-a_yb_x
+\end{array}\right.,\quad\vec c=\left|\begin{array}{ccc}
+    \vec i & \vec j & \vec k \\
+    a_x & a_y & a_z \\
+    b_x & b_y & b_z
+\end{array}\right|;\]
+\subsubsection{Volume by 4 points}
+\(V=\displaystyle\frac{|(\vec a-\vec d)\cdot((\vec b-\vec d)\times(\vec c-\vec d))|}{6}\);\\
+\subsubsection{Angle between vectors}
+\(\varphi=\) atan2\((\vec a\times\vec b,\vec a\cdot\vec b)\);\\
+\subsubsection{Plane in space}
+1. \(Ax+By+Cz+D=0,\ \vec n = (A,B,C)\);\\
+2. By point and \(\vec n\): \(A(x-x_0)+B(y-y_0)+C(z-z_0)=0\);\\
+\subsubsection{Which side of a plane a point \(\vec p\)}
+\(\vec q = (\vec b - \vec a)\times(\vec c - \vec a)\). Result is a sign of \((\vec p - \vec a)\times\vec q\), equals 0 if \(p\in (a,b,c)\);
+\subsubsection{Point in angle}
+\((C\in\angle AOB)\): \(sign(\vec{OA}\times\vec{OC})=sign(\vec{OA}\times\vec{OB})\) \& \(sign(\vec{OB}\times\vec{OC})=sign(\vec{OB}\times\vec{OA})\);
+\subsubsection{Rays intersection}
+\((\vec{AB}\cap\vec{CD})\): \(sign(\vec{AB}\times\vec{AC})\neq sign(\vec{AB}\times\vec{CD})\) \& \(sign(\vec{CD}\times\vec{CB})\neq sign(\vec{CD}\times\vec{AB})\);
+\subsubsection{Segments intersection}
+\(sign(\vec{AB}\times\vec{AC})\cdot sign(\vec{AB}\times\vec{AD})\le0\) \& mirror condition for non-collinear;
+\begin{minted}{cpp}
+if (((a - b) ^ (c - d)) != 0) {
+  return sign((a-b)^(a-c))*sign((a-b)^(a-d))<=0
+      && sign((c-d)^(c-a))*sign((c-d)^(c-b))<=0;
+}
+if (((a-c)^(a-d))!=0 || ((c-a)^(c-b)) != 0) {
+  return false;
+}
+return (c-a)*(c-b)<=0 || (d-a)*(d-b)<=0
+       || (a-c)*(a-d)<=0 || (b-c)*(b-d)<=0;
+\end{minted}
+\subsubsection{Lines intersection...}
+Let \(A_1x+B_1y+C_1=0\) and \(A_2x+B_2y+C_2=0\). They match if \(\displaystyle\frac{A_1}{A_2}=\frac{B_1}{B_2}=\frac{C_1}{C_2}\), parallel if \(\displaystyle\frac{A_1}{A_2}=\frac{B_1}{B_2}\neq\frac{C_1}{C_2}\), else \(x=\displaystyle\frac{C_2B_1-C_1B_2}{A_1B_2-A_2B_1},\ y=\frac{C_2A_1-C_1A_2}{A_2B_1-A_1B_2}\);
+\subsubsection{Distance between point \(C\) and line \(AB\)}
+1. \(h_{AC}=\displaystyle\frac{|\vec{AB}\times\vec{AC}|}{|\vec{AB}|}\);\\
+2. \(d=\displaystyle\frac{|Ax_0+By_0+C|}{\sqrt{A^2+B^2}}\).\\
+\subsubsection{Projection of a point onto a line}
+\((x_0\pm d\displaystyle\frac{A}{\sqrt{A^2+B^2}},y_0\pm d\displaystyle\frac{B}{\sqrt{A^2+B^2}})\);\\
+\subsubsection{Line coefficients by 2 points}
+\(A=y_2-y_1,\ B=x_1-x_2,\ C=x_2y_1-x_1y_2\);\\
 
 \subsection{Теория вероятности}
 \subsubsection{Дискретные распределения}
